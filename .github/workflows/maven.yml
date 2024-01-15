@@ -2,7 +2,7 @@ name: SonarCloud
 on:
   push:
     branches:
-      [main, develop]
+      [main, develop, release]
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
@@ -11,7 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        fetch-depth: 0        
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven       
     - run: mvn test      
     - name: Generate JaCoCo Badge
       id: jacoco

@@ -9,14 +9,14 @@ jobs:
   unit-test:
     runs-on: ubuntu-latest
     steps:  
+      - run: git clone https://github.com/danielcorreaa/tech-challenge-core.git
       - uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'          
-          cache: maven          
-      - run: git clone https://github.com/danielcorreaa/tech-challenge-core.git
+          cache: maven  
       - run: mvn -chdir=tech-challenge-core clean package --file pom.xml 
   sonar:
     needs: unit-test

@@ -19,6 +19,7 @@ jobs:
       - run: git clone https://github.com/danielcorreaa/tech-challenge-core.git
       - run: mvn clean package -chdir=tech-challenge-core/pom.xml    
   sonar:
+    needs: unit-test
     name: Build and analyze
     runs-on: ubuntu-latest
     steps:

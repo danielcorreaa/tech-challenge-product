@@ -17,7 +17,7 @@ jobs:
           distribution: 'temurin'          
           cache: maven          
       - run: git clone https://github.com/danielcorreaa/tech-challenge-core.git
-      - run: mvn clean install --file -chdir=tech-challenge-core/pom.xml    
+      - run: mvn clean package -chdir=tech-challenge-core/pom.xml    
   sonar:
     name: Build and analyze
     runs-on: ubuntu-latest

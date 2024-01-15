@@ -112,6 +112,17 @@
 		</dependency>
     </dependencies>
 
+	<repositories>
+		<repository>
+			<id>tech-challenge-core-mvn-repo</id>
+			<url>https://raw.github.com/danielcorreaa/tech-challenge-core/mvn-repo/</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<plugin>

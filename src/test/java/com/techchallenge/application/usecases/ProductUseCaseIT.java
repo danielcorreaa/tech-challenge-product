@@ -37,7 +37,7 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration( classes = {MongoTestConfig.class})
 @TestPropertySource(locations = "classpath:/application-test.yaml")
 @Testcontainers
-class ProductUseCaseTest {
+class ProductUseCaseIT {
 
     ProductUseCase productUseCase;
     ProductGateway productGateway;

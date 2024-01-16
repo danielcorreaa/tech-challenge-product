@@ -9,8 +9,14 @@ import java.util.List;
 public class ProductEntityMapper {
 
 	public ProductDocument toProductDocument(Product product) {
-		return new ProductDocument(product.getSku(), product.getTitle(), product.getCategory().toString(),
-				product.getDescription(), product.getPrice(), product.getImage());
+		return ProductDocument.builder()
+				.image(product.getImage())
+				.price(product.getPrice())
+				.title(product.getTitle())
+				.id(product.getSku())
+				.description(product.getDescription())
+				.category(product.getCategoryName())
+				.build();
 	}
 
 	public Product toProduct(ProductDocument entity) {

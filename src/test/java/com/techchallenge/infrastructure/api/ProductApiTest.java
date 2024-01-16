@@ -44,9 +44,10 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -225,6 +226,22 @@ class ProductApiTest {
             assertEquals("Carne com Alface e pao", description, "Must Be Equals");
             assertEquals("X Salada Bacon", title, "Must Be Equals");
             assertEquals(new BigDecimal("10.0"), price, "Must Be Equals");
+        }
+    }
+
+    @Nested
+    class TestDeleteProduct {
+        @Test
+        void testDeleteProductFieldsValid() throws Exception {
+            String sku = "02364";
+            mockMvc.perform(delete("/api/v1/products/delete/"+sku).contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk()).andExpect(content().string("{\"code\":200,\"message\":null,\"body\":\"Delete with success!\",\"errors\":null,\"hasNext\":null,\"total\":null}"));
+            verify(repository, times(1)).deleteById(sku);
+        }
+
+        @Test
+        void testUpdateProductJustTitleField() throws Exception {
+
         }
     }
 

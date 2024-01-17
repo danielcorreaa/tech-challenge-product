@@ -9,6 +9,7 @@ import com.techchallenge.domain.entity.Product;
 import com.techchallenge.domain.enums.Category;
 import com.techchallenge.infrastructure.api.request.UpdateProductRequest;
 import com.techchallenge.infrastructure.gateways.ProductRepositoryGateway;
+import com.techchallenge.infrastructure.persistence.document.ProductDocument;
 import com.techchallenge.infrastructure.persistence.mapper.ProductEntityMapper;
 import com.techchallenge.infrastructure.persistence.repository.ProductRepository;
 import com.techchallenge.utils.MockUtils;
@@ -81,6 +82,7 @@ class ProductUseCaseIT {
 
     @Test
     void testInsertProduct(){
+
         Product product =  productUseCase.insert( MockUtils.getProduct(null));
 
         assertNotNull(product.getSku(), "Sku Must Be not null");
@@ -261,6 +263,35 @@ class ProductUseCaseIT {
                 () -> productUseCase.findById("sku456987002"));
         assertEquals("Product not found!",
                 notFoundException.getMessage(), "Must Be Equals");
+    }
+
+    @Test
+    void testProductDocumentEqualsAndHashCode_productEquals(){
+
+        Product product = productUseCase.findById("sku456987002");
+        ProductDocument productDocument = mapper.toProductDocument(product);
+        ProductDocument other = ProductDocument.builder()
+                .image("")
+                .title("Coca Cola")
+                .id("sku456987002")
+                .price(new BigDecimal("15.0")).category("BEBIDA").description("Gelada")
+                .build();
+        assertTrue(productDocument.equals(other));
+        assertNotNull(product.hashCode());
+    }
+    @Test
+    void testProductDocumentEqualsAndHashCode_productNotEquals(){
+
+        Product product = productUseCase.findById("sku456987002");
+        ProductDocument productDocument = mapper.toProductDocument(product);
+        ProductDocument other = ProductDocument.builder()
+                .image("test")
+                .title("Coca Cola")
+                .id("sku456987002")
+                .price(new BigDecimal("15.0")).category("BEBIDA").description("Gelada")
+                .build();
+        assertFalse(productDocument.equals(other));
+        assertNotNull(product.hashCode());
     }
 
 

@@ -1,7 +1,7 @@
 package com.techchallenge.domain.entity;
 
 import com.techchallenge.domain.enums.Category;
-import org.bson.types.ObjectId;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -24,10 +24,10 @@ class ProductTest {
 
     @Test
     void testProductWithInvalidCategory() {
-        IllegalArgumentException assertThrows = assertThrows(IllegalArgumentException.class,
-                () -> new Product("sku12098","X Bacon", "xx", "test", new BigDecimal("10.0"), ""));
-
-        assertEquals("Invalid Category!", assertThrows.getMessage(), "Must Be Equals");
+        Assertions.assertThatThrownBy(
+                () -> new Product("sku12098","X Bacon", "xx", "test", new BigDecimal("10.0"), ""))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Invalid Category!");
     }
 
 

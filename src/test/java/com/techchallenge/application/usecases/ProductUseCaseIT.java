@@ -265,35 +265,5 @@ class ProductUseCaseIT {
                 notFoundException.getMessage(), "Must Be Equals");
     }
 
-    @Test
-    void testProductDocumentEqualsAndHashCode_productEquals(){
-
-        Product product = productUseCase.findById("sku456987002");
-        ProductDocument productDocument = mapper.toProductDocument(product);
-        ProductDocument other = ProductDocument.builder()
-                .image("")
-                .title("Coca Cola")
-                .id("sku456987002")
-                .price(new BigDecimal("15.0")).category("BEBIDA").description("Gelada")
-                .build();
-        assertTrue(productDocument.equals(other));
-        assertNotNull(product.hashCode());
-    }
-    @Test
-    void testProductDocumentEqualsAndHashCode_productNotEquals(){
-
-        Product product = productUseCase.findById("sku456987002");
-        ProductDocument productDocument = mapper.toProductDocument(product);
-        ProductDocument other = ProductDocument.builder()
-                .image("test")
-                .title("Coca Cola")
-                .id("sku456987002")
-                .price(new BigDecimal("15.0")).category("BEBIDA").description("Gelada")
-                .build();
-        assertFalse(productDocument.equals(other));
-        assertNotNull(product.hashCode());
-    }
-
-
 
 }

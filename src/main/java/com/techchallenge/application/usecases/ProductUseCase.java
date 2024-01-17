@@ -3,7 +3,6 @@ package com.techchallenge.application.usecases;
 import com.techchallenge.core.response.Result;
 import com.techchallenge.domain.entity.Product;
 import com.techchallenge.infrastructure.api.request.UpdateProductRequest;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 

@@ -238,11 +238,6 @@ class ProductApiTest {
                     .andExpect(status().isOk()).andExpect(content().string("{\"code\":200,\"message\":null,\"body\":\"Delete with success!\",\"errors\":null,\"hasNext\":null,\"total\":null}"));
             verify(repository, times(1)).deleteById(sku);
         }
-
-        @Test
-        void testUpdateProductJustTitleField() throws Exception {
-
-        }
     }
 
     @Nested

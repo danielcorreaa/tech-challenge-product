@@ -39,6 +39,10 @@ public class Product {
 		return category;
 	}
 
+	public String getCategoryName() {
+		return category.name();
+	}
+
 	public void setCategory(Category category) {
 		this.category = category;
 	}

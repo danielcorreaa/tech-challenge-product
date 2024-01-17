@@ -57,15 +57,15 @@ public class ProductApi {
 	}
 
 	@GetMapping("/find/{sku}")
-	public ResponseEntity<Result<Product>> findById(@PathVariable String sku) {
+	public ResponseEntity<Result<ProductResponse>> findById(@PathVariable String sku) {
 		Product product = productUseCase.findById(sku);
-		return ResponseEntity.ok(Result.ok(product));
+		return ResponseEntity.ok(Result.ok(mapper.toProductResponse(product)));
 	}
 
 	@GetMapping("/find")
-	public ResponseEntity<Result<List<Product>>> findById(@RequestParam List<String> skus) {
-		List<Product> product = productUseCase.findByIds(skus);
-		return ResponseEntity.ok(Result.ok(product));
+	public ResponseEntity<Result<List<ProductResponse>>> findById(@RequestParam List<String> skus) {
+		List<Product> products = productUseCase.findByIds(skus);
+		return ResponseEntity.ok(Result.ok(mapper.toProductResponseList(products)));
 	}
 
 }

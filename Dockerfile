@@ -1,4 +1,12 @@
-FROM eclipse-temurin:17-jre-jammy
+FROM eclipse-temurin:17-jdk-alpine
+# Setting up work directory
+WORKDIR /app
+
+# Copy the jar file into our app
+COPY  target/tech-challenge-product-*.jar tech-challenge-product.jar
+
+# Exposing port 8080
 EXPOSE 8080
-COPY --from=build /app/target/tech-challenge-product*.jar /tech-challenge-product.jar
-CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/tech-challenge-product.jar"]
+
+# Starting the application
+CMD ["java", "-jar", "tech-challenge-product.jar"]

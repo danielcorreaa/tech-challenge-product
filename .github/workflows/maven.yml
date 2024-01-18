@@ -73,8 +73,8 @@ jobs:
           cache: maven
       - run: mvn clean install --file pom.xml
 
-  if: github.ref == 'refs/heads/develop'
   docker-pull-image:
+    if: github.ref == 'refs/heads/develop'
     needs: build
     runs-on: ubuntu-latest
     steps:

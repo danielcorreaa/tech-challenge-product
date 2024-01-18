@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: customer-deployment
+  name: tech-challenge-product
   labels:
-    app: customer-deployment
+    app: tech-challenge-product
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: customer-deployment
+      app: tech-challenge-product
   template:
     metadata:
       labels:
-        app: customer-deployment
+        app: tech-challenge-product
     spec:
       containers:
-      - name: customer-deployment
-        image: daniel36/customer-1:1.0
+      - name: tech-challenge-product
+        image: daniel36/tech-challenge-product:1
         imagePullPolicy: IfNotPresent
         ports:
           - name: http
@@ -26,26 +26,26 @@ spec:
             cpu: 0.2
             memory: "512Mi"
         env:
-        - name: DB_PASSWORD
+        - name: MONGO_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config-map
+              key: mongo-host
+        - name: MONGO_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config-map
+              key: mongo-port
+        - name: MONGO_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config-map
+              key: mysql-database-name
+        - name: MONGO_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-pass
-              key: mysql-user-password
-        - name: DB_SERVER
-          valueFrom:
-            configMapKeyRef:
-              name:  mysql-config-map
-              key: mysql-server
-        - name: DB_NAME
-          valueFrom:
-            configMapKeyRef:
-              name:  mysql-config-map
-              key: mysql-database-name
-        - name: DB_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-config-map
-              key: mysql-user-username
+              name: mongo-secret
+              key: mongo-password
      
 ---
 apiVersion: v1

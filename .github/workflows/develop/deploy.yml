@@ -1,0 +1,52 @@
+name: Deploy
+on:
+  workflow_call:
+jobs:
+  Develop:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Kubectl tool installer
+      uses: Azure/setup-kubectl@v3
+
+    - run: aws sts get-caller-identity
+
+    - run: aws eks update-kubeconfig --region us-east-1 --name dev
+
+    - run: kubectl get svc
+
+    - run: kubectl delete secret mysql-database-name --ignore-not-found
+    - run: kubectl create secret generic mysql-database-name --from-literal=MYSQL_DATABASE=${{secrets.MYSQL_DATABASE}}
+
+    - run: kubectl delete secret mysql-user-username --ignore-not-found
+    - run: kubectl create secret generic mysql-user-username --from-literal=MYSQL_USER=${{secrets.MYSQL_USER}}
+
+    - run: kubectl delete secret mysql-user-password --ignore-not-found
+    - run: kubectl create secret generic mysql-user-password --from-literal=MYSQL_PASSWORD=${{secrets.MYSQL_PASSWORD}}
+
+    - run: kubectl delete secret mysql-root-password --ignore-not-found
+    - run: kubectl create secret generic mysql-root-password --from-literal=MYSQL_ROOT_PASSWORD=${{secrets.MYSQL_PASSWORD}}
+
+
+    - run: kubectl delete secret mysql-server --ignore-not-found
+    - run: kubectl create secret generic mysql-server --from-literal=DB_SERVER=${{secrets.DB_SERVER}}
+
+    - run: kubectl delete secret db-password --ignore-not-found
+    - run: kubectl create secret generic db-password --from-literal=DB_PASSWORD=${{secrets.MYSQL_PASSWORD}}
+
+    - run: kubectl delete secret db-name --ignore-not-found
+    - run: kubectl create secret generic db-name --from-literal=DB_NAME=${{secrets.MYSQL_DATABASE}}
+
+    - run: kubectl delete secret mysql-user --ignore-not-found
+    - run: kubectl create secret generic mysql-user --from-literal=DB_USERNAME=${{secrets.MYSQL_USER}}
+
+
+    - run: kubectl apply -f tech-challenge-infra-terraform-kubernetes/kubernetes/mysql/mysql-configmap.yaml
+    - run: kubectl apply -f tech-challenge-infra-terraform-kubernetes/kubernetes/mysql/mysql-pv.yaml
+    - run: kubectl apply -f tech-challenge-infra-terraform-kubernetes/kubernetes/mysql/mysql-deployment-service.yaml
+    - run: kubectl apply -f tech-challenge-infra-terraform-kubernetes/kubernetes/mysql/mysql-deployment.yaml
+
+    - run: kubectl apply -f tech-challenge-infra-terraform-kubernetes/kubernetes/java/app-tech-challenge-service.yaml
+    - run: kubectl apply -f tech-challenge-infra-terraform-kubernetes/kubernetes/java/app-tech-challenge.yaml
+    - run: kubectl set image deployment/app-tech-challenge app=daniel36/techchallenge:${{github.run_number}}
+    - run: kubectl get svc
+    - run: terraform -chdir=tech-challenge-infra-terraform-kubernetes/env/develop destroy -auto-approve

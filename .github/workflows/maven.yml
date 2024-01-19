@@ -89,7 +89,7 @@ jobs:
       - name: Login Docker Hub
         run: docker login -u daniel36 -p ${{ secrets.PASSWORD_DOCKER_HUB }}
       - name: Build docker image
-        run: docker build -t ddaniel36/tech-challenge-product:${{github.run_number}} .
+        run: docker build -t daniel36/tech-challenge-product:${{github.run_number}} .
       - name: Push image docker
         run: docker push daniel36/tech-challenge-product:${{github.run_number}}
 

@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: mongo-config-map
 data:
-  mongo-host: mongo
-  mongo-port: 27017
-  mongo-username: root
+  mongo-host: mongo-db
+  mongo-port: "27017"
+  mongo-username: "root"

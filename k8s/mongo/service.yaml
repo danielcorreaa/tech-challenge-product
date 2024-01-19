@@ -5,10 +5,11 @@ metadata:
   labels:
     app: "mongo-db"
 spec:
+  externalTrafficPolicy: "Local"
   ports:
     - name: "mongodb"
       port: 27017
       nodePort: 30332
-  type: "NodePort"
+  type: "LoadBalancer"
   selector:
     app: "mongo-db"

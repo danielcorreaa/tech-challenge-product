@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
       - name: tech-challenge-product
-        image: daniel36/tech-challenge-product:1
+        image: product:01
         imagePullPolicy: IfNotPresent
         ports:
           - name: http
-            containerPort: 8080
+            containerPort: 8082
         resources:
           limits:
             cpu: 0.2
@@ -40,7 +40,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: mongo-config-map
-              key: mysql-database-name
+              key: mongo-username
         - name: MONGO_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -51,16 +51,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-tech-challenge
+  name: tech-challenge-product
   labels:
-    app: app-tech-challenge
+    app: tech-challenge-product
 spec:
   type: LoadBalancer
   selector:
-    app: app-tech-challenge
+    app: tech-challenge-product
   ports:
   - protocol: TCP
     name: http
-    port: 8080
-    targetPort: 8080
-    nodePort: 30002
+    port: 8082
+    targetPort: 8082
+    nodePort: 30003

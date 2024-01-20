@@ -16,6 +16,7 @@ import com.techchallenge.utils.MockUtils;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -36,7 +37,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration( classes = {MongoTestConfig.class})
-@TestPropertySource(locations = "classpath:/application-test.yaml")
+@TestPropertySource(locations = "classpath:/application-test.properties")
 @Testcontainers
 class ProductUseCaseIT {
 

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: tech-challenge-product
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: tech-challenge-product
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tech-challenge-product
-        image: product:01
+        image: product:02
         imagePullPolicy: IfNotPresent
         ports:
           - name: http
@@ -31,36 +31,17 @@ spec:
             configMapKeyRef:
               name: mongo-config-map
               key: mongo-host
-        - name: MONGO_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: mongo-config-map
-              key: mongo-port
+
         - name: MONGO_USERNAME
           valueFrom:
             configMapKeyRef:
               name: mongo-config-map
               key: mongo-username
+
         - name: MONGO_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mongo-secret
               key: mongo-password
-     
+
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: tech-challenge-product
-  labels:
-    app: tech-challenge-product
-spec:
-  type: LoadBalancer
-  selector:
-    app: tech-challenge-product
-  ports:
-  - protocol: TCP
-    name: http
-    port: 8082
-    targetPort: 8082
-    nodePort: 30003

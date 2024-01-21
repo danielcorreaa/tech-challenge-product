@@ -27,10 +27,7 @@ spec:
             memory: "512Mi"
         env:
         - name: MONGO_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: mongo-config-map
-              key: mongo-host
+          value: mongo-db
 
         - name: MONGO_USERNAME
           valueFrom:
@@ -43,5 +40,6 @@ spec:
             secretKeyRef:
               name: mongo-secret
               key: mongo-password
+
 
 ---

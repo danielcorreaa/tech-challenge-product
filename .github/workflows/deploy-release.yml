@@ -17,10 +17,12 @@ jobs:
 
       - run: aws sts get-caller-identity
 
-      - run: aws eks update-kubeconfig --region us-east-1 --name dev
+      - run: aws eks update-kubeconfig --region us-east-1 --name homolog
 
       - run: kubectl get svc
 
-      - run: kubectl apply -f k8s/products-deployment.yaml
-      - run: kubectl apply -f k8s/products-service.yaml
-      #- run: kubectl apply -f k8s/products-hpa.yaml
+      - run: kubectl apply -f ..\..\k8s/products-deployment.yaml
+      - run: kubectl apply -f ..\..\k8s/products-service.yaml
+      - run: kubectl set image deployment/app-tech-challenge app=daniel36/tech-challenge-product:${{github.run_number}}
+      - run: kubectl apply -f ..\..\k8s/products-hpa.yaml
+      - run: kubectl get svc

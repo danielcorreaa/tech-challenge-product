@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tech-challenge-product
+  name: product
   labels:
-    app: tech-challenge-product
+    app: product
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tech-challenge-product
+      app: product
   template:
     metadata:
       labels:
-        app: tech-challenge-product
+        app: product
     spec:
       containers:
-      - name: tech-challenge-product
+      - name: product
         image: product:02
         imagePullPolicy: IfNotPresent
         ports:

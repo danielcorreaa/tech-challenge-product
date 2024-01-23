@@ -23,7 +23,7 @@ jobs:
 
       - run: kubectl apply -f k8s/products-deployment.yaml
       - run: kubectl apply -f k8s/products-service.yaml
-      - run: kubectl set image deployment/product app=daniel36/tech-challenge-product:${{github.run_number}}
+      - run: kubectl set image deployment/product product=daniel36/tech-challenge-product:${{github.run_number}}
       - run: kubectl apply -f k8s/products-hpa.yaml
       - run: kubectl get svc
 

@@ -21,8 +21,8 @@ jobs:
 
       - run: kubectl get svc
 
-      - run: kubectl apply -f ..\..\k8s/products-deployment.yaml
-      - run: kubectl apply -f ..\..\k8s/products-service.yaml
+      - run: kubectl apply -f k8s/products-deployment.yaml
+      - run: kubectl apply -f k8s/products-service.yaml
       - run: kubectl set image deployment/app-tech-challenge app=daniel36/tech-challenge-product:${{github.run_number}}
-      - run: kubectl apply -f ..\..\k8s/products-hpa.yaml
+      - run: kubectl apply -f k8s/products-hpa.yaml
       - run: kubectl get svc

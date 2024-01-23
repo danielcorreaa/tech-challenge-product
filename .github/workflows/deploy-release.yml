@@ -2,7 +2,7 @@ name: Deploy
 on:
   workflow_call:
 jobs:
-  develop:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

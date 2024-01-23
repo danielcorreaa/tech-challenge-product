@@ -74,7 +74,7 @@ jobs:
       - run: mvn clean install --file pom.xml
 
   docker-pull-image:
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -93,3 +93,20 @@ jobs:
       - name: Push image docker
         run: docker push daniel36/tech-challenge-product:${{github.run_number}}
 
+  deploy-dev:
+      needs: docker-pull-image
+      if: github.ref == 'refs/heads/develop'
+      uses: ./.github/workflows/deploy-dev.yml
+      secrets: inherit
+
+  deploy-qa:
+      needs: docker-pull-image
+      if: github.ref == 'refs/heads/develop'
+      uses: ./.github/workflows/deploy-release.yml
+      secrets: inherit
+
+  deploy-prod:
+      needs: docker-pull-image
+      if: github.ref == 'refs/heads/develop'
+      uses: ./.github/workflows/deploy-prod.yml
+      secrets: inherit

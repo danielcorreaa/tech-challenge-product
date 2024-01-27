@@ -118,7 +118,7 @@ jobs:
 
   docker-pull-image:
     name: Pull Image Docker Hub
-    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main'
+    #if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     steps:

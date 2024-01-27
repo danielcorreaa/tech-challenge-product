@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techchallenge.application.gateway.ProductGateway;
 import com.techchallenge.application.usecases.ProductUseCase;
 import com.techchallenge.application.usecases.interactor.ProductUseCaseInteractor;
-import com.techchallenge.core.exceptions.NotFoundException;
 import com.techchallenge.core.exceptions.handler.ExceptionHandlerConfig;
 import com.techchallenge.core.response.JsonUtils;
 import com.techchallenge.core.response.Result;
@@ -18,17 +17,14 @@ import com.techchallenge.infrastructure.gateways.ProductRepositoryGateway;
 import com.techchallenge.infrastructure.persistence.document.ProductDocument;
 import com.techchallenge.infrastructure.persistence.mapper.ProductEntityMapper;
 import com.techchallenge.infrastructure.persistence.repository.ProductRepository;
-import com.techchallenge.utils.MockUtils;
+import com.techchallenge.utils.ProductHelpér;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -36,11 +32,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -85,7 +79,7 @@ class ProductApiTest {
     class TestInsertProduct {
         @Test
         void testInsertProductFieldsInvalidFields() throws Exception {
-            InsertProductRequest request = new InsertProductRequest("", "", "", new BigDecimal("0"), "");
+            InsertProductRequest request = new InsertProductRequest(null,"", "", "", new BigDecimal("0"), "");
             String jsonRequest = jsonUtils.toJson(request).orElse("");
 
             MvcResult mvcResult = mockMvc.perform(post("/api/v1/products").contentType(MediaType.APPLICATION_JSON)
@@ -106,7 +100,7 @@ class ProductApiTest {
 
         @Test
         void testInsertProductFieldsInvalidCategory() throws Exception {
-            InsertProductRequest request = new InsertProductRequest("X Salada", "SANDUICHE", "Carne com Alface e pao", new BigDecimal("10.0"), "");
+            InsertProductRequest request = new InsertProductRequest(null,"X Salada", "SANDUICHE", "Carne com Alface e pao", new BigDecimal("10.0"), "");
             String jsonRequest = jsonUtils.toJson(request).orElse("");
 
             MvcResult mvcResult = mockMvc.perform(post("/api/v1/products").contentType(MediaType.APPLICATION_JSON)
@@ -127,7 +121,7 @@ class ProductApiTest {
 
         @Test
         void testInsertProductFieldsValid() throws Exception {
-            InsertProductRequest request = new InsertProductRequest("X Salada", "LANCHE",
+            InsertProductRequest request = new InsertProductRequest(null,"X Salada", "LANCHE",
                     "Carne com Alface e pao", new BigDecimal("10.0"), "");
             String jsonRequest = jsonUtils.toJson(request).orElse("");
             Product product = mapper.toProduct(request);
@@ -245,7 +239,7 @@ class ProductApiTest {
         @Test
         void testFindProductByCategoryLANCHE() throws Exception {
 
-            List<Product> toProducts = MockUtils.getProducts();
+            List<Product> toProducts = ProductHelpér.getProducts();
             List<ProductDocument> documents = entityMapper.toProductDocumentList(toProducts);
             ProductDocument productDocument = documents.stream().filter(ent -> ent.getCategory().equals("LANCHE")).findFirst().orElse(null);
 
@@ -274,7 +268,7 @@ class ProductApiTest {
 
         @Test
         void testFindProductByCategoryBEBIDA() throws Exception {
-            List<Product> toProducts = MockUtils.getProducts();
+            List<Product> toProducts = ProductHelpér.getProducts();
             List<ProductDocument> documents = entityMapper.toProductDocumentList(toProducts);
             ProductDocument productDocument = documents.stream().filter(ent -> ent.getCategory().equals("BEBIDA")).findFirst().orElse(null);
 
@@ -305,7 +299,7 @@ class ProductApiTest {
         @Test
         void testFindProductByCategoryInvalidCategory() throws Exception {
 
-            List<Product> toProducts = MockUtils.getProducts();
+            List<Product> toProducts = ProductHelpér.getProducts();
             List<ProductDocument> documents = entityMapper.toProductDocumentList(toProducts);
             ProductDocument productDocument = documents.stream().filter(ent -> ent.getCategory().equals("BEBIDA")).findFirst().orElse(null);
 
@@ -381,7 +375,7 @@ class ProductApiTest {
         @Test
         void testFindProductByIds() throws Exception {
 
-            List<ProductDocument> productDocuments = MockUtils.getProductDocuments().stream()
+            List<ProductDocument> productDocuments = ProductHelpér.getProductDocuments().stream()
                     .filter( product ->product.getId().equals("sku456987003") || product.getId().equals("sku456987004")).toList();
 
             when(repository.findByIdIn(List.of("sku456987003","sku456987004")))

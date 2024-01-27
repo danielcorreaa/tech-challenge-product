@@ -1,0 +1,11 @@
+{
+  "code": 201,
+  "body": {
+    "sku": "65b2fabb9ad4ba38b34d9d43",
+    "title": "X Salada",
+    "category": "LANCHE",
+    "description": "Carne com Alface e pao",
+    "price": 10.0,
+    "image": ""
+  }
+}

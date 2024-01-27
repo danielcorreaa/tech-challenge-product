@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductMapper {
@@ -17,7 +18,8 @@ public class ProductMapper {
 				request.getDescription(), request.getPrice(), request.getImage());
 	}
 	public Product toProduct(InsertProductRequest request) {
-		return new Product(new ObjectId().toString(), request.getTitle(), request.getCategory(),
+		String sku = Optional.ofNullable(request.sku()).orElse(new ObjectId().toString());
+		return new Product(sku, request.getTitle(), request.getCategory(),
 				request.getDescription(), request.getPrice(), request.getImage());
 	}
 	

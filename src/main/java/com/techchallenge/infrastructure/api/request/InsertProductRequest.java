@@ -1,5 +1,6 @@
 package com.techchallenge.infrastructure.api.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 public record InsertProductRequest(
+		String sku,
 		@Getter
 		@NotBlank(message = "Title is required!")
 		String title, 

@@ -17,7 +17,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @Log4j2
 @Configuration
 @EnableMongoRepositories(basePackages = "com.techchallenge.infrastructure.persistence.repository")
-
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
     public static final String MONGODB = "mongodb://";

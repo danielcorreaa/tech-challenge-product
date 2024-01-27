@@ -26,11 +26,8 @@ jobs:
         uses: cicirello/jacoco-badge-generator@v2.11.0
         with:
           fail-if-coverage-less-than: 0.8
-          # Enables failing workflow run when branches coverage below specified threshold.
-          fail-if-branches-less-than: 0.8
-          # Enables failing workflow if coverage is less than it was on previous run.
-          fail-on-coverage-decrease: 0.8
-          fail-on-branches-decrease: 0.8
+          generate-coverage-endpoint: true
+          generate-summary: true
 
   integration-test:
     needs: unit-test

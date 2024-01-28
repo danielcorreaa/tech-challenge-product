@@ -1,0 +1,25 @@
+server:
+  port: 8082
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: tech-challenge-product
+  data:
+    mongodb:
+      authentication-database: admin
+      host: ${MONGO_HOST}
+      port:
+      database: tech-challenge-product
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
+
+swagger:
+  title: Microserviço de Produtos
+  contact:
+    email: daniel.cor@outlook.com
+    name: Daniel Aleixo Correa
+    description: Microserviço desenvolvido para o curso de pós tech da FIAP
+    version: 1.0
+
+

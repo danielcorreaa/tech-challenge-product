@@ -1,0 +1,15 @@
+{
+  "code": 200,
+  "body": [
+    {
+      "sku": "sku456987002",
+      "title": "Coca Cola",
+      "category": "BEBIDA",
+      "description": "Gelada",
+      "price": 15.0,
+      "image": ""
+    }
+  ],
+  "hasNext": false,
+  "total": 1
+}

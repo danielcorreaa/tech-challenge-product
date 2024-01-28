@@ -1,0 +1,21 @@
+{
+  "code": 200,
+  "body": [
+    {
+      "sku": "sku456987003",
+      "title": "Batata",
+      "category": "ACOMPANHAMENTO",
+      "description": "com bacon",
+      "price": 8.0,
+      "image": ""
+    },
+    {
+      "sku": "sku456987004",
+      "title": "Bolo",
+      "category": "SOBREMESA",
+      "description": "chocolate com creme",
+      "price": 20.0,
+      "image": ""
+    }
+  ]
+}

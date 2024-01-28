@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product
+  labels:
+    app: product
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product
+  template:
+    metadata:
+      labels:
+        app: product
+    spec:
+      containers:
+      - name: product
+        image: product:02
+        imagePullPolicy: IfNotPresent
+        ports:
+          - name: http
+            containerPort: 8082
+        resources:
+          limits:
+            cpu: 0.2
+            memory: "512Mi"
+        env:
+        - name: MONGO_HOST
+          value: mongo-db
+
+        - name: MONGO_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config-map
+              key: mongo-username
+
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-password
+
+
+---

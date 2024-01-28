@@ -1,0 +1,11 @@
+{
+    "code": 200,
+    "body": {
+        "sku": "635981f6e40f61599e839ddb",
+        "title": "X Salada Bacon",
+        "category": "LANCHE",
+        "description": "Carne com Alface e pao",
+        "price": 10.0,
+        "image": ""
+    }
+}

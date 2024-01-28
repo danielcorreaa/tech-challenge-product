@@ -9,7 +9,7 @@ import com.techchallenge.infrastructure.persistence.mapper.ProductEntityMapper;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class MockUtils {
+public class ProductHelpér {
 
     public static List<UpdateProductRequest> getUpdateProductRequest() {
         UpdateProductRequest request1 = new UpdateProductRequest("sku456987001", "X Salada", "LANCHE", "Carne com Alface e pao", new BigDecimal("10.0"), "");
@@ -24,8 +24,21 @@ public class MockUtils {
         return List.of(request1, request2, request3, request4, request5, request6);
     }
 
+    public static List<InsertProductRequest> getInsertProducsRequest() {
+        InsertProductRequest request1 = new InsertProductRequest("sku456987001", "X Salada", "LANCHE", "Carne com Alface e pao", new BigDecimal("10.0"), "");
+        InsertProductRequest request2 = new InsertProductRequest("sku456987002", "Coca Cola", "BEBIDA", "Gelada", new BigDecimal("15.0"), "");
+        InsertProductRequest request3 = new InsertProductRequest("sku456987003", "Batata", "ACOMPANHAMENTO", "com bacon", new BigDecimal("8.0"), "");
+        InsertProductRequest request4 = new InsertProductRequest("sku456987004", "Bolo", "SOBREMESA", "chocolate com creme", new BigDecimal("20.0"), "");
+
+        InsertProductRequest request5 = new InsertProductRequest("sku456987005", "X Frango", "LANCHE", "lanche com frango", new BigDecimal("20.0"), "");
+
+        InsertProductRequest request6 = new InsertProductRequest("sku456987006", "X Bacon", "LANCHE", "lanche com bacon", new BigDecimal("20.0"), "");
+
+        return List.of(request1, request2, request3, request4, request5, request6);
+    }
+
     public static InsertProductRequest getInsertProductRequest() {
-        return new InsertProductRequest("", "", "", new BigDecimal("0"), "");
+        return new InsertProductRequest( null,"", "", "", new BigDecimal("0"), "");
     }
 
     public static List<ProductDocument> getProductDocuments(){

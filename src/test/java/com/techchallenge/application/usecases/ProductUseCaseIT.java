@@ -9,14 +9,12 @@ import com.techchallenge.domain.entity.Product;
 import com.techchallenge.domain.enums.Category;
 import com.techchallenge.infrastructure.api.request.UpdateProductRequest;
 import com.techchallenge.infrastructure.gateways.ProductRepositoryGateway;
-import com.techchallenge.infrastructure.persistence.document.ProductDocument;
 import com.techchallenge.infrastructure.persistence.mapper.ProductEntityMapper;
 import com.techchallenge.infrastructure.persistence.repository.ProductRepository;
-import com.techchallenge.utils.MockUtils;
+import com.techchallenge.utils.ProductHelpér;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -76,15 +74,14 @@ class ProductUseCaseIT {
         productGateway = new ProductRepositoryGateway(repository, mapper);
         productUseCase = new ProductUseCaseInteractor(productGateway);
 
-        repository.deleteAll(MockUtils.getProductDocuments());
-        repository.saveAll(MockUtils.getProductDocuments());
-
+        repository.deleteAll(ProductHelpér.getProductDocuments());
+        repository.saveAll(ProductHelpér.getProductDocuments());
     }
 
     @Test
     void testInsertProduct(){
 
-        Product product =  productUseCase.insert( MockUtils.getProduct(null));
+        Product product =  productUseCase.insert( ProductHelpér.getProduct(null));
 
         assertNotNull(product.getSku(), "Sku Must Be not null");
         assertEquals("X Salada Bacon",product.getTitle(), "Must Be Equals");

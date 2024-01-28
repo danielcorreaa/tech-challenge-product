@@ -17,9 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 class RedirectApiTest {
-
     MockMvc mockMvc;
-
     RedirectApi redirectApi;
 
     @BeforeEach

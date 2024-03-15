@@ -39,9 +39,9 @@
   GET api/v1/products/{category}/LANCHE?page=0&size=10
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `category`      | `string` | **Obrigatório**. categorias para pesquisa: LANCHE, ACOMPANHAMENTO, BEBIDA, SOBREMESA |
+| Parâmetro   | Tipo  | Default     | Descrição                                   |
+| :---------- | :--------- |------- |:------------------------------------------ |
+| `category`      | `string` | |**Obrigatório**. categorias para pesquisa: LANCHE, ACOMPANHAMENTO, BEBIDA, SOBREMESA |
 | `page`      | `int` | 0| Valor 0 retornara do primeiro registro até o valor  do size|
 | `size`      | `int` | 10 |Quantidade de registro que retornaram na resposta|
 

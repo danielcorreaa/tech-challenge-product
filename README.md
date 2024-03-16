@@ -1,4 +1,14 @@
 
+# Microsserviço tech-challenge-product
+
+Microsserviço responsável pelo gerenciamento de produtos
+
+
+## Autores
+
+- [@danielcorreaa](https://github.com/danielcorreaa)
+
+
 ## Documentação da API
 
 ### Cadastro, atualização e buscas de produtos
@@ -72,3 +82,99 @@
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `sku`      | `string` | **Obrigatório**. Sku do produto que você quer excluir |
+
+## Stack utilizada
+
+
+**Back-end:** Java, Spring Boot, Mongodb
+
+
+## OWASP ZAP
+
+- [@report-before](https://danielcorreaa.github.io/tech-challenge-product/before/cardapio/2024-03-11-ZAP-Report-.html)
+
+
+- [@report-after](https://danielcorreaa.github.io/tech-challenge-product/after/cardapio/2024-03-11-ZAP-Report-.html)
+
+
+## Rodando localmente
+
+Clone o projeto
+
+```bash
+  git clone danielcorreaa/tech-challenge-product
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd tech-challenge-product
+```
+
+Docker
+
+```bash
+  docker compose up -d
+```
+
+No navegador
+
+```bash
+  http://localhost:8085/
+```
+
+
+
+## Deploy
+
+### Para subir a aplicação usando kubernetes
+
+#### Infraestrutura:
+
+Clone o projeto com a infraestrutura
+
+```bash
+  git clone danielcorreaa/tech-challenge-infra-terraform-kubernetes
+```
+Entre no diretório do projeto
+
+```bash
+  cd tech-challenge-infra-terraform-kubernetes/
+````
+
+Execute os comandos
+
+```bash   
+- run: kubectl apply -f kubernetes/metrics.yaml 
+- run: kubectl apply -f kubernetes/mongo/mongo-secrets.yaml 
+- run: kubectl apply -f kubernetes/mongo/mongo-configmap.yaml 
+- run: kubectl apply -f kubernetes/mongo/mongo-pvc.yaml 
+- run: kubectl apply -f kubernetes/mongo/mongo-service.yaml 
+- run: kubectl apply -f kubernetes/mongo/mongo-statefulset.yaml
+
+````
+
+#### Aplicação:
+
+docker hub [@repositorio](https://hub.docker.com/r/daniel36/tech-challenge-product/tags)
+
+Clone o projeto
+
+```bash
+  git clone danielcorreaa/tech-challenge-product
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd tech-challenge-product
+```
+
+Execute os comandos
+```bash   
+- run: kubectl apply -f k8s/products-deployment.yaml
+- run: kubectl apply -f k8s/products-service.yaml
+- run: kubectl apply -f k8s/products-hpa.yaml
+
+````
+

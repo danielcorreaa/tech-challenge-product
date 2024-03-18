@@ -7,8 +7,12 @@ import com.techchallenge.infrastructure.api.mapper.ProductMapper;
 import com.techchallenge.infrastructure.api.request.InsertProductRequest;
 import com.techchallenge.infrastructure.api.request.ProductResponse;
 import com.techchallenge.infrastructure.api.request.UpdateProductRequest;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/products")
+@Tag(name = "Product API")
 public class ProductApi {
 
 	private final ProductUseCase productUseCase;
@@ -48,11 +53,13 @@ public class ProductApi {
 		return ResponseEntity.ok(Result.ok("Delete with success!"));
 	}
 
-	@GetMapping("/category/{category}")
+	@GetMapping(value = "/category/{category}")
 	public ResponseEntity<Result<List<ProductResponse>>> findByCategory(
-			@PathVariable String category, @RequestParam int page, @RequestParam int size) {
+			@PathVariable String category, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
 		Result<List<Product>> product = productUseCase.findByCategory(category, page, size);
-		return ResponseEntity.ok(Result.ok(mapper.toProductResponseList(product.getBody()),
+		return ResponseEntity.status(HttpStatus.OK).headers(product.getHeadersNosniff()).
+				body(Result.ok(mapper.toProductResponseList(product.getBody()),
 				product.getHasNext(), product.getTotal()));
 	}
 

@@ -104,16 +104,14 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 - [@RIPD](https://danielcorreaa.github.io/tech-challenge-product/RIPD.pdf)
 
-
-
-
+- [@Desenho Padrão Saga coreografado.](https://danielcorreaa.github.io/tech-challenge-orders/images/saga-diagrama.png)
 
 ## Rodando localmente
 
 Clone o projeto
 
 ```bash
-  git clone danielcorreaa/tech-challenge-product
+  git clone https://github.com/danielcorreaa/tech-challenge-product.git
 ```
 
 Entre no diretório do projeto
@@ -145,7 +143,7 @@ No navegador
 Clone o projeto com a infraestrutura
 
 ```bash
-  git clone danielcorreaa/tech-challenge-infra-terraform-kubernetes
+  git clone https://github.com/danielcorreaa/tech-challenge-infra-terraform-kubernetes.git
 ```
 Entre no diretório do projeto
 
@@ -172,7 +170,7 @@ docker hub [@repositorio](https://hub.docker.com/r/daniel36/tech-challenge-produ
 Clone o projeto
 
 ```bash
-  git clone danielcorreaa/tech-challenge-product
+  git clone https://github.com/danielcorreaa/tech-challenge-product.git
 ```
 
 Entre no diretório do projeto

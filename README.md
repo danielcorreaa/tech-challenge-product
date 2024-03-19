@@ -102,7 +102,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 ## Relatório RIPD
 *RELATÓRIO DE IMPACTO À PROTEÇÃO DE DADOS PESSOAIS*
 
-- [@RIPD](https://danielcorreaa.github.io/tech-challenge-product/before/RIPD.pdf)
+- [@RIPD](https://danielcorreaa.github.io/tech-challenge-product/RIPD.pdf)
 
 
 

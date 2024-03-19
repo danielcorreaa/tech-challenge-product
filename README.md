@@ -104,7 +104,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 - [@RIPD](https://danielcorreaa.github.io/tech-challenge-product/RIPD.pdf)
 
-- [@Desenho Padrão Saga coreografado.](https://danielcorreaa.github.io/tech-challenge-orders/images/saga-diagrama.png)
+
 
 ## Rodando localmente
 

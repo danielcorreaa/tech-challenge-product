@@ -8,6 +8,11 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 - [@danielcorreaa](https://github.com/danielcorreaa)
 
+## Stack utilizada
+
+
+**Back-end:** Java, Spring Boot, Mongodb
+
 
 ## Documentação da API
 
@@ -71,7 +76,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `listaSkusku`      | `List` | **Obrigatório**. Lista de skus dos produtos|
+| `listaSkus`      | `List` | **Obrigatório**. Lista de skus dos produtos|
 
 
 #### Excluir produto
@@ -83,10 +88,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 | :---------- | :--------- | :------------------------------------------ |
 | `sku`      | `string` | **Obrigatório**. Sku do produto que você quer excluir |
 
-## Stack utilizada
 
-
-**Back-end:** Java, Spring Boot, Mongodb
 
 
 ## OWASP ZAP
@@ -96,6 +98,14 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 
 - [@report-after](https://danielcorreaa.github.io/tech-challenge-product/after/cardapio/2024-03-11-ZAP-Report-.html)
+
+## Relatório RIPD
+*RELATÓRIO DE IMPACTO À PROTEÇÃO DE DADOS PESSOAIS*
+
+- [@RIPD](https://danielcorreaa.github.io/tech-challenge-product/RIPD.pdf)
+
+
+
 
 
 ## Rodando localmente

@@ -76,7 +76,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `listaSkusku`      | `List` | **Obrigatório**. Lista de skus dos produtos|
+| `listaSkus`      | `List` | **Obrigatório**. Lista de skus dos produtos|
 
 
 #### Excluir produto

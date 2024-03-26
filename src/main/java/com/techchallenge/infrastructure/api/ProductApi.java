@@ -20,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/products")
+@RequestMapping("products/api/v1")
 @Tag(name = "Product API")
 public class ProductApi {
 

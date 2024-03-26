@@ -106,6 +106,15 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 
 
+#### Desenhos
+
+- [@Desenho Padrão Saga coreografado.](https://danielcorreaa.github.io/tech-challenge-orders/images/saga-diagrama.png)
+
+
+- [@Desenho arquitetura.](https://danielcorreaa.github.io/tech-challenge-orders/images/diagrama-arquitetura.png)
+
+
+
 ## Rodando localmente
 
 Clone o projeto

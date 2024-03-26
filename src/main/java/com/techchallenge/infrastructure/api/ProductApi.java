@@ -20,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/products")
+@RequestMapping("products/api/v1")
 @Tag(name = "Product API")
 public class ProductApi {
 
@@ -37,7 +37,7 @@ public class ProductApi {
 	public ResponseEntity<Result<ProductResponse>> insert(@RequestBody @Valid InsertProductRequest request,
 														  UriComponentsBuilder uri) {
 		Product product = productUseCase.insert(mapper.toProduct(request));
-		UriComponents uriComponents = uri.path("/api/v1/products/find/{sku}").buildAndExpand(product.getSku());
+		UriComponents uriComponents = uri.path("/products/api/v1/find/{sku}").buildAndExpand(product.getSku());
 		return ResponseEntity.created(uriComponents.toUri()).body(Result.create(mapper.toProductResponse(product)));
 	}
 

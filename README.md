@@ -21,7 +21,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 #### Cadastrar produto
 
 ```http
-  POST api/v1/products
+  POST products/api/v1
 ```
 
 | Parâmetro   | Tipo       | Descrição                           |
@@ -36,7 +36,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 #### Atualizar produto
 
 ```http
-  PUT api/v1/products
+  PUT products/api/v1
 ```
 
 | Parâmetro   | Tipo       | Descrição                           |
@@ -51,7 +51,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 #### Buscar produtos por categoria
 ```http
-  GET api/v1/products/{category}/LANCHE?page=0&size=10
+  GET products/api/v1/{category}/LANCHE?page=0&size=10
 ```
 
 | Parâmetro   | Tipo  | Default     | Descrição                                   |
@@ -62,7 +62,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 #### Buscar produtos por sku
 ```http
-  GET api/v1/products/find/{sku}
+  GET products/api/v1/find/{sku}
 ```
 
 | Parâmetro   | Tipo       | Descrição                                   |
@@ -71,7 +71,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 #### Buscar produtos por skus
 ```http
-  GET /api/v1/products/find?skus={listaSkus}
+  GET /products/api/v1/find?skus={listaSkus}
 ```
 
 | Parâmetro   | Tipo       | Descrição                                   |
@@ -81,7 +81,7 @@ Microsserviço responsável pelo gerenciamento de produtos
 
 #### Excluir produto
 ```http
-  DELETE api/v1/customers/"delete/{sku}"
+  DELETE products/api/v1/"delete/{sku}"
 ```
 
 | Parâmetro   | Tipo       | Descrição                                   |
@@ -103,6 +103,15 @@ Microsserviço responsável pelo gerenciamento de produtos
 *RELATÓRIO DE IMPACTO À PROTEÇÃO DE DADOS PESSOAIS*
 
 - [@RIPD](https://danielcorreaa.github.io/tech-challenge-product/RIPD.pdf)
+
+
+
+#### Desenhos
+
+- [@Desenho Padrão Saga coreografado.](https://danielcorreaa.github.io/tech-challenge-orders/images/saga-diagrama.png)
+
+
+- [@Desenho arquitetura.](https://danielcorreaa.github.io/tech-challenge-orders/images/diagrama-arquitetura.png)
 
 
 

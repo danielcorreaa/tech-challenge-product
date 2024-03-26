@@ -33,7 +33,7 @@ public class StepDefinition {
 
     ProductRepository productRepository;
 
-    private String ENDPOINT_PRODUCTS = "http://localhost:8085/api/v1/products";
+    private String ENDPOINT_PRODUCTS = "http://localhost:8085/products/api/v1";
 
 
     @Dado("que quero cadastrar um novo produto")

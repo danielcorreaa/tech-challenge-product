@@ -82,7 +82,7 @@ class ProductApiTest {
             InsertProductRequest request = new InsertProductRequest(null,"", "", "", new BigDecimal("0"), "");
             String jsonRequest = jsonUtils.toJson(request).orElse("");
 
-            MvcResult mvcResult = mockMvc.perform(post("/api/v1/products").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(post("/products/api/v1").contentType(MediaType.APPLICATION_JSON)
                             .content(jsonRequest))
                     .andExpect(status().isBadRequest()).andReturn();
 
@@ -103,7 +103,7 @@ class ProductApiTest {
             InsertProductRequest request = new InsertProductRequest(null,"X Salada", "SANDUICHE", "Carne com Alface e pao", new BigDecimal("10.0"), "");
             String jsonRequest = jsonUtils.toJson(request).orElse("");
 
-            MvcResult mvcResult = mockMvc.perform(post("/api/v1/products").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(post("/products/api/v1").contentType(MediaType.APPLICATION_JSON)
                             .content(jsonRequest))
                     .andExpect(status().isBadRequest()).andReturn();
 
@@ -129,7 +129,7 @@ class ProductApiTest {
 
             when(repository.save(any())).thenReturn(productDocument);
 
-            MvcResult mvcResult = mockMvc.perform(post("/api/v1/products").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(post("/products/api/v1").contentType(MediaType.APPLICATION_JSON)
                             .content(jsonRequest))
                     .andExpect(status().isCreated()).andReturn();
 
@@ -166,7 +166,7 @@ class ProductApiTest {
             when(repository.save(productDocument)).thenReturn(productDocument);
             when(repository.findById(id)).thenReturn(Optional.of(productDocument));
 
-            MvcResult mvcResult = mockMvc.perform(put("/api/v1/products").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(put("/products/api/v1").contentType(MediaType.APPLICATION_JSON)
                             .content(jsonRequest))
                     .andExpect(status().isOk()).andReturn();
 
@@ -200,7 +200,7 @@ class ProductApiTest {
             when(repository.save(any(ProductDocument.class))).thenReturn(productUpdate);
             when(repository.findById(id)).thenReturn(Optional.of(productFind));
 
-            MvcResult mvcResult = mockMvc.perform(put("/api/v1/products").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(put("/products/api/v1").contentType(MediaType.APPLICATION_JSON)
                             .content(jsonRequest))
                     .andExpect(status().isOk()).andReturn();
 
@@ -228,7 +228,7 @@ class ProductApiTest {
         @Test
         void testDeleteProductFieldsValid() throws Exception {
             String sku = "02364";
-            mockMvc.perform(delete("/api/v1/products/delete/"+sku).contentType(MediaType.APPLICATION_JSON))
+            mockMvc.perform(delete("/products/api/v1/delete/"+sku).contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk()).andExpect(content().string("{\"code\":200,\"message\":null,\"body\":\"Delete with success!\",\"errors\":null,\"hasNext\":null,\"total\":null}"));
             verify(repository, times(1)).deleteById(sku);
         }
@@ -245,7 +245,7 @@ class ProductApiTest {
 
             when(repository.findByCategory("LANCHE",  PageRequest.of(0, 1))).thenReturn(new PageImpl(List.of(productDocument)));
 
-            MvcResult mvcResult = mockMvc.perform(get("/api/v1/products/category/LANCHE?page=0&size=1").contentType(MediaType.APPLICATION_JSON))
+            MvcResult mvcResult = mockMvc.perform(get("/products/api/v1/category/LANCHE?page=0&size=1").contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk()).andReturn();
 
             Optional<Result<List<ProductResponse>>> response = jsonUtils.parse(mvcResult.getResponse().getContentAsString(),
@@ -274,7 +274,7 @@ class ProductApiTest {
 
             when(repository.findByCategory("BEBIDA",  PageRequest.of(0, 1))).thenReturn(new PageImpl(List.of(productDocument)));
 
-            MvcResult mvcResult = mockMvc.perform(get("/api/v1/products/category/BEBIDA?page=0&size=1")
+            MvcResult mvcResult = mockMvc.perform(get("/products/api/v1/category/BEBIDA?page=0&size=1")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk()).andReturn();
 
@@ -306,7 +306,7 @@ class ProductApiTest {
             when(repository.findByCategory("TEST", PageRequest.of(0, 1)))
                     .thenReturn(new PageImpl(Collections.emptyList()));
 
-            MvcResult mvcResult = mockMvc.perform(get("/api/v1/products/category/TEST?page=0&size=1").contentType(MediaType.APPLICATION_JSON))
+            MvcResult mvcResult = mockMvc.perform(get("/products/api/v1/category/TEST?page=0&size=1").contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isNotFound()).andReturn();
 
             Optional<Result<List<ProductResponse>>> response = jsonUtils.parse(mvcResult.getResponse().getContentAsString(),
@@ -331,7 +331,7 @@ class ProductApiTest {
 
             when(repository.findById(id)).thenReturn(Optional.ofNullable(entity));
 
-            MvcResult mvcResult = mockMvc.perform(get("/api/v1/products/find/635981f6e40f61599e839ddb").contentType(MediaType.APPLICATION_JSON))
+            MvcResult mvcResult = mockMvc.perform(get("/products/api/v1/find/635981f6e40f61599e839ddb").contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk()).andReturn();
 
             Optional<Result<ProductResponse>> response = jsonUtils.parse(mvcResult.getResponse().getContentAsString(),
@@ -355,7 +355,7 @@ class ProductApiTest {
         @Test
         void testFindProductWhenNotExists() throws Exception {
 
-            MvcResult mvcResult = mockMvc.perform(get("/api/v1/products/find/635981f6e40f61599e839ddb")
+            MvcResult mvcResult = mockMvc.perform(get("/products/api/v1/find/635981f6e40f61599e839ddb")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isNotFound()).andReturn();
 
@@ -381,7 +381,7 @@ class ProductApiTest {
             when(repository.findByIdIn(List.of("sku456987003","sku456987004")))
                     .thenReturn(productDocuments);
 
-            MvcResult mvcResult = mockMvc.perform(get("/api/v1/products/find?skus=sku456987003,sku456987004")
+            MvcResult mvcResult = mockMvc.perform(get("/products/api/v1/find?skus=sku456987003,sku456987004")
                     .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk()).andReturn();
 

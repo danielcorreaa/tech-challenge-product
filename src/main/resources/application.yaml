@@ -1,5 +1,7 @@
 server:
   port: 8082
+  servlet:
+    context-path: /tech-challenge-product/
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -16,10 +18,13 @@ spring:
 
 swagger:
   title: Microserviço de Produtos
+  description: Microserviço desenvolvido para o curso de pós tech da FIAP
+  version: 1.0
   contact:
     email: daniel.cor@outlook.com
     name: Daniel Aleixo Correa
-    description: Microserviço desenvolvido para o curso de pós tech da FIAP
-    version: 1.0
 
-
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: /products

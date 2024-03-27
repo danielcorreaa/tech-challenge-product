@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RedirectApi {
 	
-	@GetMapping("/")
+	@GetMapping("/product")
 	public String swagger() {
 		return "redirect:swagger-ui.html";
 	}

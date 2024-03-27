@@ -51,7 +51,7 @@ import static org.mockito.Mockito.*;
 @Testcontainers
 class ProductApiIT {
 
-    public static final String API_V_1_PRODUCTS = "/products/api/v1";
+    public static final String API_V_1_PRODUCTS = "/tech-challenge-product/products/api/v1";
     @Container
     static MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:6.0.2"))
             .waitingFor(Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(20)));

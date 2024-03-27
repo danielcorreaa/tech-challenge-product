@@ -1,5 +1,7 @@
 server:
   port: 8082
+  servlet:
+    context-path: /tech-challenge-product/
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -22,4 +24,7 @@ swagger:
     email: daniel.cor@outlook.com
     name: Daniel Aleixo Correa
 
-
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: /products

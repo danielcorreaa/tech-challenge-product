@@ -29,7 +29,7 @@ class RedirectApiTest {
 
     @Test
     void swagger() throws Exception {
-       mockMvc.perform(get("/products"))
+       mockMvc.perform(get("/product"))
                 .andExpect(redirectedUrl("swagger-ui.html"));
     }
 }

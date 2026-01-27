@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("products/api/v1")
 @Tag(name = "Product API")
+@CrossOrigin
 public class ProductApi {
 
 	private final ProductUseCase productUseCase;
@@ -31,6 +33,16 @@ public class ProductApi {
 		super();
 		this.productUseCase = productUseCase;
 		this.mapper = mapper;
+	}
+
+	@PostMapping("bulk")
+	public ResponseEntity<Result<List<ProductResponse>>> bulk(@RequestBody @Valid List<InsertProductRequest> requests) {
+		List<Product> products = new ArrayList<>();
+		requests.forEach( request -> {
+			Product product = productUseCase.insert(mapper.toProduct(request));
+			products.add(product);
+		});
+		return ResponseEntity.ok(Result.ok(mapper.toProductResponseList(products)));
 	}
 
 	@PostMapping

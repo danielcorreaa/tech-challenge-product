@@ -56,7 +56,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - run: mvn clean install -P unit-test
-      - run: docker-compose up -d --build
+      - run: docker compose up -d --build
       - run: docker ps
       - uses: GuillaumeFalourd/wait-sleep-action@v1
         with:
@@ -111,7 +111,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - run: mvn clean install -P unit-test --file pom.xml
+      - run:   --file pom.xml
 
   docker-pull-image:
     name: Pull Image Docker Hub
